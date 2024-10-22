@@ -1,0 +1,47 @@
+@page "/search"
+@using TravelBookingBackend.Services
+@inject BookingService BookingService
+
+<h3>Search Customer Bookings</h3>
+
+<EditForm Model="@searchModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="customerName">Customer Name:</label>
+        <InputText id="customerName" @bind-Value="searchModel.CustomerName" />
+    </div>
+    <div>
+        <label for="bookingDate">Booking Date:</label>
+        <InputDate id="bookingDate" @bind-Value="searchModel.BookingDate" />
+    </div>
+    <button type="submit">Search</button>
+</EditForm>
+
+@if (searchResults != null)
+{
+    <h4>Search Results</h4>
+    <ul>
+        @foreach (var result in searchResults)
+        {
+            <li>@result</li>
+        }
+    </ul>
+}
+
+@code {
+    private SearchModel searchModel = new SearchModel();
+    private List<string> searchResults;
+
+    private async Task HandleValidSubmit()
+    {
+        searchResults = await BookingService.SearchBookings(searchModel.CustomerName, searchModel.BookingDate);
+    }
+
+    public class SearchModel
+    {
+        public string CustomerName { get; set; }
+        public DateTime BookingDate { get; set; }
+    }
+}

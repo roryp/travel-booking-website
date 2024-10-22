@@ -14,13 +14,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function fetchSearchResults(destination, checkin, checkout, travelers) {
-    // Placeholder for fetching data from third-party APIs
-    // Replace with actual API calls and data processing
-    const flights = await fetchFlights(destination, checkin, checkout, travelers);
-    const hotels = await fetchHotels(destination, checkin, checkout, travelers);
-    const carRentals = await fetchCarRentals(destination, checkin, checkout, travelers);
+    const response = await fetch('https://localhost:5001/api/search', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ destination, checkin, checkout, travelers })
+    });
 
-    return { flights, hotels, carRentals };
+    if (!response.ok) {
+        throw new Error('Failed to fetch search results');
+    }
+
+    const searchResults = await response.json();
+    return searchResults;
 }
 
 function displaySearchResults(searchResults) {

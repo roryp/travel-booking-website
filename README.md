@@ -20,3 +20,31 @@ This project is a simple travel booking website where users can search for fligh
 2. Use the search form to enter your destination, check-in/check-out dates, and the number of travelers.
 3. Click the "Search" button to view search results for flights, hotels, and car rentals.
 4. Create an account to save your booking preferences and make secure transactions.
+
+## Blazor Backend Setup
+
+1. Navigate to the `TravelBookingBackend` directory:
+    ```
+    cd TravelBookingBackend
+    ```
+2. Restore the project dependencies:
+    ```
+    dotnet restore
+    ```
+3. Build the project:
+    ```
+    dotnet build
+    ```
+4. Run the Blazor Server app:
+    ```
+    dotnet run
+    ```
+
+## Blazor Backend Usage Instructions
+
+1. Open the Blazor Server app in your web browser:
+    ```
+    https://localhost:5001
+    ```
+2. Use the search form to enter the customer name and booking date.
+3. Click the "Search" button to view search results for customer bookings.
